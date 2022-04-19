@@ -474,7 +474,3 @@ class RNNModel:
         return lyrics
 
 
-if __name__ == '__main__':
-    # Load the model.
-    model = RNNModel()
-    model.fit()
