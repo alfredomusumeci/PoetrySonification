@@ -17,7 +17,7 @@ and notes pairs.
 ## Installation
 - Clone the repository:
     ```
-    git clone 
+    git clone https://github.com/alfredomusumeci/PoetrySonification.git
     ```
 - Install the dependencies:
     ```
