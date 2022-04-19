@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block title %} Sonify a text {% endblock %}
+{% block content %}
+    <!-- How to use the website alert -->
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                Write the text you wish to transform into music in the input box below, or upload it (.txt only).
+                <br> To hear the piece press sonify.
+                <br> You will be given the option to see the music sheet,
+                as well as send your results to improve the produced music.
+            </div>
+        </div>
+    </div>
+    <!-- Error alert when uploading a wrong file -->
+    <div class="row">
+        <div class="col-12">
+            <div id="wrongTypeError" class="alert alert-danger" role="alert">
+              Only upload of .txt file is allowed!
+            </div>
+        </div>
+    </div>
+    <!-- Error alert when text does not have any known words  -->
+    <div class="row">
+        <div class="col-12">
+            <div id="vocabularyError" class="alert alert-danger" role="alert">
+              It is likely that the text you have inputted is too short, or contains no known words.
+                Please refresh the page and try again.
+            </div>
+        </div>
+    </div>
+    <!-- Form to submit sonification of text -->
+    <div class="row" style="margin-bottom: -10px">
+        <div class="col-12">
+            <h5 style="font-size: 2vw;"> Unleash Your Creativity! </h5>
+            <form id="formoid" method="post">
+                <div class="form-group">
+                    <label style="width: 100%">
+                        <textarea name="content"
+                                  class ="form-control"
+                                  id="poetry-content"
+                                  placeholder="Type your poetry here"
+                                  rows="15"
+                                  style="width: inherit; resize: vertical;"
+                                  >{{ request.form['content'] }}</textarea>
+                    </label>
+                    <!-- Upload button -->
+                    <div class="mb-3">
+                      <input class="form-control" type="file" id="formFile" accept=".txt">
+                    </div>
+                    <!-- Submit button -->
+                    <button id="submit-button" type="submit" class="btn btn-primary btn-lg btn-block"> Sonify </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal for music sheet image -->
+    <div class="modal fade" id="musicSheetModal" tabindex="-1" role="dialog" aria-labelledby="musicSheetModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="musicSheetModalTitle">Generated music sheet</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div id="osmdContainer"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a id="downloadButton" href="" download="" target="_blank" class="btn btn-primary">Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Music sheet, feedback and download buttons -->
+    <div class="btn-group" role="group" aria-label="Basic example">
+            <button id="music-sheet-button" type="button" class="btn btn-secondary btn-lg"
+                    data-toggle="modal" data-target="#musicSheetModal"> Show music sheet </button>
+            <button id="rate-button" type="button" class="btn btn-secondary btn-lg"
+                    data-toggle="modal" data-target="#feedbackModal"> Rate it! </button>
+            <a id="download-button" href="" download="" target="_blank" class="btn btn-secondary btn-lg">Download</a>
+    </div>
+    <!-- Audio player for midi files -->
+    <div class="row">
+        <midi-visualizer type="waterfall" id="myVisualizer"></midi-visualizer>
+        <midi-player id="source" src="" style="width: 100%" visualizer="midi-visualizer">
+            <p> If you see this, your browser does not support the audio element. </p>
+        </midi-player>
+    </div>
+    <!-- Modal to gather feedback about sonification -->
+    <div id="feedbackModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="feedbackModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="feedbackModalLongTitle">Rate It!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="feedbackModalBody" class="modal-body">
+              <p align="justify" style="margin-bottom: 0"> Do you think the music produced reflected the feelings behind the inputted text?
+                  Your answer will be used for further improvement of the model.
+                  <br><b> Positive answers will have their text and corresponding music recorded. </b>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button id="accept-button" type="button" class="btn btn-success">Yes</button>
+            <button id="deny-button" type="button" class="btn btn-danger">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="../static/js/opensheetmusicdisplay.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <script src="../static/js/poetryapp.render_music_sheet.js"></script>
+    <script src="../static/js/poetryapp.buttons_rendering.js"></script>
+    <script src="../static/js/poetryapp.submit_form.js"></script>
+    <script src="../static/js/poetryapp.spinner_on_button.js"></script>
+    <script src="../static/js/poetryapp.upload_to_db.js"></script>
+    <script src="../static/js/poetryapp.sonify_textfile.js"></script>
+{% endblock %}

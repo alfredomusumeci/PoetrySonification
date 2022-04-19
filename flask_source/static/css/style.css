@@ -1,0 +1,85 @@
+/*************
+ * Main body *
+ *************/
+
+.jumbotron {
+    margin-bottom: 0;
+    min-height: 100vh;
+ }
+
+/****************
+ * Audio player *
+ ****************/
+
+midi-visualizer .waterfall-visualizer {
+    margin-top: 10px;
+    padding-left: 50px;
+    overflow: auto;
+}
+
+midi-visualizer .waterfall-notes-container::-webkit-scrollbar {
+    display: none;
+}
+
+midi-visualizer .waterfall-visualizer svg rect.note {
+    opacity: 0.7;
+}
+
+/**********
+ * Footer *
+ **********/
+
+body > footer > div {
+    background: rgb(0 0 0 / 5%);
+}
+
+/*****************
+ * Form elements *
+ *****************/
+
+#formoid > div > div {
+    height: 35px;
+}
+
+#formFile {
+    height: auto;
+}
+
+/***********
+ * Buttons *
+ ***********/
+
+#music-sheet-button {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    margin-right: 5px;
+}
+
+#rate-button {
+    border-radius: 0.3rem;
+}
+
+#download-button {
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+    margin-left: 5px;
+}
+
+body > div > div > div.btn-group {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+body > div > div > div.btn-group {
+    width: 100%;
+}
+
+/***********
+ *  Images *
+ ***********/
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

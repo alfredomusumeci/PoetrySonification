@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} About this project {% endblock %}</h1>
+    <p> This website was built as part of Alfredo Musumeci's dissertation about Data Sonification.
+    Its purpose is to show the possibility of converting written data, such as text, into music.
+    The conversion relies on a Deep Neural Network which has been trained on hundreds of songs for
+    the purpose of extracting sentiment from words interdependecy. </p>
+{% endblock %}
