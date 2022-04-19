@@ -23,6 +23,7 @@ and notes pairs.
     ```
     pip install -r requirements.txt
     ```
+- Set the project working directory to the root of the repository.
 - Run the app within the source folder:
     ```
     python -m flask run

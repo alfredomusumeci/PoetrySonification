@@ -301,8 +301,7 @@ class RNNModel:
         :param validation_data: the validation set.
         :return the history of the training. """
 
-        checkpoint_filepath = "flask_source/static/assets/model-checkpoints/model-improvement-{epoch:02d}-{" \
-                              "loss:.2f}.h5 "
+        checkpoint_filepath = "flask_source/static/assets/model-checkpoints/model-improvement-{epoch:02d}-{loss:.2f}.h5"
 
         # Only the best weights that maximise the
         # accuracy of the model are saved.
@@ -473,3 +472,9 @@ class RNNModel:
             if encoding != 0:
                 lyrics += self.songs_index_words[encoding] + ' '
         return lyrics
+
+
+if __name__ == '__main__':
+    # Load the model.
+    model = RNNModel()
+    model.fit()
