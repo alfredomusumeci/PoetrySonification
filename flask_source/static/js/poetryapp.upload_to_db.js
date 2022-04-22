@@ -17,13 +17,10 @@ function uploadToDatabase(id) {
     // Upload only if the user likes the sonification.
     if (id === "accept-button") {
         if (sonificationProduced) {
-            console.log(textInputted)
-            console.log(notesProduced)
-
             $.ajax({
               type: "POST",
               url: "/upload_to_db",
-              data: {"text": textInputted, "notes": notesProduced}
+              data: {"text": textInputted, "notes": notesProduced.join(" ")}
             }).done(function(data) {
                console.log(data)
             });

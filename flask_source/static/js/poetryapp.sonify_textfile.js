@@ -19,7 +19,6 @@ function handleFiles(input) {
         reader.readAsText(file);
 
         reader.onload = function () {
-            console.log(reader.result);
             textArea.value = reader.result;
             textArea.click();
         };

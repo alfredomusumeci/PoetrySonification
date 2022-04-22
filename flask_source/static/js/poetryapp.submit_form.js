@@ -30,7 +30,6 @@ $(document).ready(function() {
                 // un-hide the audio element, and make a download available.
                 function (data) {
                     // Temporarily store the information for optional feedback.
-                    console.log(data)
                     showButtons();
                     sonificationProduced = data.success;
                     textInputted = data.content;
